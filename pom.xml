@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.stsai</groupId>
+    <artifactId>testpatchmod</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <SlayTheSpire.version>03-07-2022</SlayTheSpire.version>
+        <ModTheSpire.version>3.8.0</ModTheSpire.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.megacrit.cardcrawl</groupId>
+            <artifactId>slaythespire</artifactId>
+            <version>${SlayTheSpire.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../lib/desktop-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.evacipated.cardcrawl</groupId>
+            <artifactId>modthespire</artifactId>
+            <version>${ModTheSpire.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../lib/ModTheSpire.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>ModTheSpire.json</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>
