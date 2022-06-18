@@ -1,6 +1,6 @@
 {
-  "modid": "testpatchmod",
-  "name": "Test Patch Mod",
+  "modid": "stsautostart",
+  "name": "Slay The Spire Autostart",
   "author_list": ["spdskatr"],
   "description": "maybe the real AI was the friends we made along the way",
   "version": "1.0",
