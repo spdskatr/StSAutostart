@@ -1,10 +1,10 @@
 {
-  "modid": "stsautostart",
-  "name": "Slay The Spire Autostart",
-  "author_list": ["spdskatr"],
-  "description": "maybe the real AI was the friends we made along the way",
-  "version": "1.0",
-  "sts_version": "03-07-2022",
-  "mts_version": "2.8.0",
+  "modid": "${project.artifactId}",
+  "name": "${project.name}",
+  "author_list": ["spdskatr", "kronion"],
+  "description": "${project.description}",
+  "version": "${project.version}",
+  "sts_version": "${SlayTheSpire.version}",
+  "mts_version": "${ModTheSpire.version}",
   "dependencies": []
 }
