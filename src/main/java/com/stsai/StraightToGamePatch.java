@@ -25,14 +25,14 @@ public class StraightToGamePatch {
         if (!run) {
             logger.info("Preparing to skip splash screen and character select.");
 
-            __instance.splashScreen = null;
-            __instance.mode = CardCrawlGame.GameMode.GAMEPLAY;
-            __instance.mainMenuScreen = new MainMenuScreen();
+            CardCrawlGame.splashScreen = null;
+            CardCrawlGame.mode = CardCrawlGame.GameMode.GAMEPLAY;
+            CardCrawlGame.mainMenuScreen = new MainMenuScreen();
 
-            __instance.nextDungeon = "Exordium";
-            __instance.dungeonTransitionScreen = new DungeonTransitionScreen("Exordium");
-            __instance.monstersSlain = __instance.elites1Slain = __instance.elites2Slain = __instance.elites3Slain = 0;
-            __instance.chosenCharacter = AbstractPlayer.PlayerClass.IRONCLAD;
+            CardCrawlGame.nextDungeon = "Exordium";
+            CardCrawlGame.dungeonTransitionScreen = new DungeonTransitionScreen("Exordium");
+            CardCrawlGame.monstersSlain = CardCrawlGame.elites1Slain = CardCrawlGame.elites2Slain = CardCrawlGame.elites3Slain = 0;
+            CardCrawlGame.chosenCharacter = AbstractPlayer.PlayerClass.IRONCLAD;
             Constructor<Ironclad> constructor = Ironclad.class.getDeclaredConstructor(String.class);
             constructor.setAccessible(true);
             AbstractDungeon.player = constructor.newInstance("test");
