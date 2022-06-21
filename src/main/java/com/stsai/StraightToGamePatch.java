@@ -3,7 +3,6 @@ package com.stsai;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.characters.Ironclad;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,8 +11,9 @@ import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Random;
 
 @SpirePatch(clz= CardCrawlGame.class, method="update")
 public class StraightToGamePatch {
@@ -32,10 +32,11 @@ public class StraightToGamePatch {
             CardCrawlGame.nextDungeon = "Exordium";
             CardCrawlGame.dungeonTransitionScreen = new DungeonTransitionScreen("Exordium");
             CardCrawlGame.monstersSlain = CardCrawlGame.elites1Slain = CardCrawlGame.elites2Slain = CardCrawlGame.elites3Slain = 0;
-            CardCrawlGame.chosenCharacter = AbstractPlayer.PlayerClass.IRONCLAD;
-            Constructor<Ironclad> constructor = Ironclad.class.getDeclaredConstructor(String.class);
-            constructor.setAccessible(true);
-            AbstractDungeon.player = constructor.newInstance("test");
+            AbstractPlayer.PlayerClass chosenCharacter = AbstractPlayer.PlayerClass.values()[new Random().nextInt(AbstractPlayer.PlayerClass.values().length)];
+            CardCrawlGame.chosenCharacter = chosenCharacter;
+            Method createCharacter = CardCrawlGame.class.getDeclaredMethod("createCharacter", AbstractPlayer.PlayerClass.class);
+            createCharacter.setAccessible(true);
+            AbstractDungeon.player = (AbstractPlayer) createCharacter.invoke(CardCrawlGame.class, CardCrawlGame.chosenCharacter);
             Settings.seed = 12345L;
             AbstractDungeon.generateSeeds();
 
