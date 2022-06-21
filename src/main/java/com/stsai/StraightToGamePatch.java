@@ -28,6 +28,7 @@ public class StraightToGamePatch {
             CardCrawlGame.splashScreen = null;
             CardCrawlGame.mode = CardCrawlGame.GameMode.GAMEPLAY;
             CardCrawlGame.mainMenuScreen = new MainMenuScreen();
+            CardCrawlGame.music.fadeOutBGM();  // Instantiating menu screen starts menu music, so fade it out.
 
             CardCrawlGame.nextDungeon = "Exordium";
             CardCrawlGame.dungeonTransitionScreen = new DungeonTransitionScreen("Exordium");
