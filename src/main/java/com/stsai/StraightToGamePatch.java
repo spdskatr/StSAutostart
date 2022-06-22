@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
 
-@SpirePatch(clz= CardCrawlGame.class, method="update")
+@SpirePatch(clz=CardCrawlGame.class, method="update")
 public class StraightToGamePatch {
     private static final Logger logger = LogManager.getLogger(StraightToGamePatch.class.getName());
     private static boolean run = false;
