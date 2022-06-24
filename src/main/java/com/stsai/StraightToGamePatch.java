@@ -18,11 +18,9 @@ import java.util.Random;
 @SpirePatch(clz=CardCrawlGame.class, method="update")
 public class StraightToGamePatch {
     private static final Logger logger = LogManager.getLogger(StraightToGamePatch.class.getName());
-    private static boolean run = false;
 
-    public static SpireReturn<Void> Prefix(CardCrawlGame __instance) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        // Should only run patch contents on first execution
-        if (!run) {
+    public static SpireReturn<Void> Prefix(CardCrawlGame __instance) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        if (CardCrawlGame.mode == CardCrawlGame.GameMode.SPLASH || CardCrawlGame.mode == CardCrawlGame.GameMode.CHAR_SELECT) {
             logger.info("Preparing to skip splash screen and character select.");
 
             CardCrawlGame.splashScreen = null;
@@ -42,8 +40,6 @@ public class StraightToGamePatch {
             AbstractDungeon.generateSeeds();
 
             //logger.info("We hacked the state machine!!!!!!! REALLY LOUD AND OBNOXIOUS LOG MESSAGE SO I NOTICE IT");
-
-            run = true;
         }
 
         return SpireReturn.Continue();
