@@ -16,12 +16,12 @@ import java.util.Random;
 
 @SpirePatch(clz=AbstractRoom.class, method="update")
 public class RandomCombatPatch {
-    private static double selectionTimer = 0.0;
+    private static double selectionTimer = 5.0;
 
     public static SpireReturn<Void> Prefix(AbstractRoom __instance) {
         AbstractRoom.RoomPhase currentPhase = __instance.phase;
 
-        if (currentPhase == AbstractRoom.RoomPhase.COMBAT) {
+        if (currentPhase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.actionManager.hasControl) {
             CardGroup hand = AbstractDungeon.player.hand;
             selectionTimer -= Gdx.graphics.getDeltaTime();
             if (selectionTimer <= 0) {
@@ -44,6 +44,9 @@ public class RandomCombatPatch {
                         target = __instance.monsters.getRandomMonster(true);
                     }
                     AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(cardToPlay, target));
+                }
+                else {
+                    AbstractDungeon.actionManager.callEndTurnEarlySequence();
                 }
 
                 selectionTimer = 5.0;
